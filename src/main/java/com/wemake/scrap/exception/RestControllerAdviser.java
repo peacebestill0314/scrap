@@ -31,9 +31,6 @@ public class RestControllerAdviser {
             message.append(fieldError.getField());
             message.append(" : ");
             message.append(fieldError.getDefaultMessage());
-            message.append(". 입력 [ ");
-            message.append(fieldError.getRejectedValue());
-            message.append(" ] ");
         });
         return new ResponseEntity<>(new ErrorMessage(HttpStatus.BAD_REQUEST, message.toString()), HttpStatus.BAD_REQUEST);
     }
@@ -48,13 +45,4 @@ public class RestControllerAdviser {
         return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UnknownHostException.class)
-    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors(UnknownHostException exception) {
-        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors(IllegalArgumentException exception) {
-        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 }
