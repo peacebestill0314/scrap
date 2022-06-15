@@ -49,9 +49,9 @@ public class ParserManager {
     }
 
     /**
-     * 출력 묶음 단위로 몫과 나머지를 구한다.
+     * 출력 묶음 단위로 몫과 나머지로 나눈다.
      */
-    public static ScrapResult bind(String text, int unit) {
+    public static ScrapResult divide(String text, int unit) {
         int textSize = text.length();
         int bindSize = textSize - Math.floorMod(textSize, unit);
         return ScrapResult.builder()

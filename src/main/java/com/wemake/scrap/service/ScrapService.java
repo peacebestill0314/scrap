@@ -19,13 +19,13 @@ public class ScrapService {
      * - crawl : url 크롤링
      * - filter : 문자열 필터링
      * - cross : 숫자, 문자 교차
-     * - bind : 출력단위 묶음
+     * - divide : 몫과 나머지 나눔
      */
     public ScrapResult scrap(ScrapRequest request) throws Exception {
         String crawlResult = CrawlerManager.crawl(request.getUrl(), request.getScrapType());
         Letter letter = ParserManager.filter(crawlResult);
         String clossResult = ParserManager.cross(letter);
-        return ParserManager.bind(clossResult, request.getUnit());
+        return ParserManager.divide(clossResult, request.getUnit());
     }
 
 }
