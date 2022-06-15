@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>scrap</title>
+    <style>
+        input, select {
+            height: 30px;
+        }
+
+        #box {
+            width: 250px;
+            border-style: solid;
+            padding: 30px;
+            font-size: 21px;
+        }
+
+        .top {
+            padding-bottom: 20px;
+        }
+
+        #top_sub_3 {
+            margin-left: 45px;
+        }
+
+        #url, #type {
+            width: 180px;
+            margin-left: 10px;
+        }
+
+        #unit {
+            width: 50px;
+            margin-left: 10px;
+        }
+
+        #button {
+            margin-left: 140px;
+            width: 100px;
+            height: 40px;
+            font-size: 19px;
+        }
+
+        .bottom {
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div>
+        <div class="top">
+            <label for="url" class="label"> URL </label>
+            <input name="url" id="url" type="text"/>
+        </div>
+        <div class="top">
+            <label for="type" class="label"> Type </label>
+            <select name="type" id="type">
+                <option value="TEXT">HTML 태그 제거</option>
+                <option value="HTML">TEXT 전체</option>
+            </select>
+        </div>
+        <div class="top" id="top_sub_3">
+            <label for="unit"> 출력 묶음 단위 </label>
+            <input name="unit" id="unit" type="number" min="1"/>
+        </div>
+        <div>
+            <button id="button"> 출력</button>
+        </div>
+    </div>
+    <div>
+        몫 : <div class="bottom" id="quotient"> </div>
+        나머지 : <div class="bottom" id="remainder"> </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#button").click(function () {
+
+        url = $("#url").val();
+        type = $("#type").val();
+        unit = $("#unit ").val();
+
+        if (validation(url, type, unit)) {
+            return
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/scrap-url',
+            type: 'GET',
+            data: {
+                url: url,
+                type: type,
+                unit: 0
+            },
+            success: function (result) {
+                $("#quotient").text(result.data.quotient);
+                $("#remainder").text(result.data.remainder);
+            },
+            error: function (request, status, error, xhr) {
+                alert.log(request, status, error, xhr)
+            }
+        });
+    });
+
+    function validation(url, type, unit) {
+        if (!url || !unit) {
+            alert("모든 값을 입력해주세요.")
+            return true;
+        }
+        var Url = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        var test = Url.test(url);
+
+        if (!test) {
+            alert("URL 형식이 잘못되었습니다.")
+            return true
+        }
+        return false
+    }
+</script>
+</body>
+</html>
