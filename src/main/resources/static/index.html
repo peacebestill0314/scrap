@@ -7,41 +7,37 @@
         input, select {
             height: 30px;
         }
-
         #box {
             width: 250px;
             border-style: solid;
             padding: 30px;
-            font-size: 21px;
         }
-
         .top {
             padding-bottom: 20px;
+            font-size: 21px;
         }
-
         #top_sub_3 {
             margin-left: 45px;
         }
-
         #url, #type {
             width: 180px;
             margin-left: 10px;
         }
-
         #unit {
             width: 50px;
             margin-left: 10px;
         }
-
         #button {
             margin-left: 140px;
             width: 100px;
             height: 40px;
             font-size: 19px;
         }
-
-        .bottom {
-            padding-top: 15px;
+        #bottom {
+            padding-top: 20px;
+        }
+        .result {
+            font-size: 10px;
         }
     </style>
 </head>
@@ -67,18 +63,21 @@
             <button id="button"> 출력</button>
         </div>
     </div>
-    <div>
-        몫 : <div class="bottom" id="quotient"> </div>
-        나머지 : <div class="bottom" id="remainder"> </div>
+    <div id="bottom">
+        몫 : <div class="bottom" id="quotient" class="result"> </div>
+        나머지 : <div class="bottom" id="remainder" class="result"> </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $("#button").click(function () {
 
-        url = $("#url").val();
-        type = $("#type").val();
-        unit = $("#unit ").val();
+        $('#quotient').empty()
+        $('#remainder').empty()
+
+        url = $('#url').val();
+        type = $('#type').val();
+        unit = $('#unit').val();
 
         if (validation(url, type, unit)) {
             return
@@ -90,14 +89,15 @@
             data: {
                 url: url,
                 type: type,
-                unit: 0
+                unit: unit
             },
             success: function (result) {
-                $("#quotient").text(result.data.quotient);
-                $("#remainder").text(result.data.remainder);
+                console.log(result);
+                $("#quotient").text(result.quotient);
+                $("#remainder").text(result.remainder);
             },
-            error: function (request, status, error, xhr) {
-                alert.log(request, status, error, xhr)
+            error: function (request) {
+                alert(request.responseJSON.code + '\n'+ request.responseJSON.message)
             }
         });
     });

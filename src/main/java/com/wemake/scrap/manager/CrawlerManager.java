@@ -2,6 +2,7 @@ package com.wemake.scrap.manager;
 
 import com.wemake.scrap.common.StringUtil;
 import com.wemake.scrap.domain.ScrapType;
+import com.wemake.scrap.exception.CrawlerEmptyException;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,13 +15,12 @@ import java.io.IOException;
 @Slf4j
 public class CrawlerManager {
 
-    public static String crawl(String url, ScrapType type) throws Exception {
+    public static String crawl(String url, ScrapType type) throws IOException {
         Connection connect = Jsoup.connect(url);
         String crawlResult = getTextByType(connect, type);
         if (StringUtil.isEmpty(crawlResult)) {
-            throw new Exception();
+            throw new CrawlerEmptyException();
         }
-        log.debug("\n 크롤링 결과 : \n {}", crawlResult);
         return crawlResult;
     }
 

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.UnexpectedTypeException;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 
 @Slf4j
@@ -34,5 +36,25 @@ public class RestControllerAdviser {
             message.append(" ] ");
         });
         return new ResponseEntity<>(new ErrorMessage(HttpStatus.BAD_REQUEST, message.toString()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors() {
+        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, "URL이 올바르지 않습니다."), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(CrawlerEmptyException.class)
+    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors(CrawlerEmptyException exception) {
+        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UnknownHostException.class)
+    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors(UnknownHostException exception) {
+        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorMessage> methodArgumentNotValidErrors(IllegalArgumentException exception) {
+        return new ResponseEntity<>(new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
