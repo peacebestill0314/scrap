@@ -26,13 +26,11 @@ public class CrawlerManager {
 
     private static String getTextByType(Connection connect, ScrapType type) throws IOException {
         String crawlResult = "";
-        switch (type) {
-            case HTML:
-                crawlResult = connect.get().html();
-                break;
-            case TEXT:
-                crawlResult = connect.get().text();
-                break;
+        if (ScrapType.isHtml(type)) {
+            crawlResult = connect.get().html();
+        }
+        if (ScrapType.isText(type)) {
+            crawlResult = connect.get().text();
         }
         return crawlResult;
     }

@@ -64,15 +64,8 @@ public class StringUtil {
      */
     private static Comparator<String> getStringComparator() {
         return (o1, o2) -> {
-            if (o1.equalsIgnoreCase(o2)) {
-                if (o1.equals(o1.toLowerCase())) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            } else {
-                return o1.compareToIgnoreCase(o2);
-            }
+            int result = o1.compareToIgnoreCase(o2);
+            return (result == 0) ? o1.compareTo(o2) : result;
         };
     }
 }

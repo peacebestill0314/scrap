@@ -1,6 +1,5 @@
 package com.wemake.scrap.manager;
 
-import com.google.common.collect.Iterables;
 import com.wemake.scrap.common.RegixUtil;
 import com.wemake.scrap.common.StringUtil;
 import com.wemake.scrap.domain.Letter;
@@ -38,14 +37,15 @@ public class ParserManager {
     public static String cross(Letter letter) {
         int alphabetSize = letter.alphabet().length();
         int numberSize = letter.number().length();
-        int maxSize = Math.max(alphabetSize, numberSize);
+        int minSize = Math.min(alphabetSize, numberSize);
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < maxSize; i++) {
-            sb.append(Iterables.get(StringUtil.stringToList(letter.alphabet()), i, RegixUtil.EMPTY));
-            sb.append(Iterables.get(StringUtil.stringToList(letter.number()), i, RegixUtil.EMPTY));
+        for (int i = 0; i < minSize; i++) {
+            sb.append(letter.alphabet().charAt(i)).append(letter.number().charAt(i));
         }
-        log.debug("\n 교차 결과 : \n {}", sb);
-        return sb.toString();
+        if (alphabetSize > numberSize) {
+            return sb.append(letter.alphabet(), minSize, alphabetSize).toString();
+        }
+        return sb.append(letter.number(), minSize, numberSize).toString();
     }
 
     /**
