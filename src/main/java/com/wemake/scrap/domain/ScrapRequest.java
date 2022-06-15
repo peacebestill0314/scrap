@@ -1,25 +1,33 @@
 package com.wemake.scrap.domain;
 
+import com.wemake.scrap.common.Enum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
  * scrap 요청 클래스
  */
-@Getter
 @Setter
+@Getter
+@ToString
 public class ScrapRequest {
 
-    @NotNull(message = "url은 필수 값 입니다")
+    @NotNull()
     private String url;
 
-    @NotNull(message = "type은 필수 값 입니다")
-    private ScrapType type;
+    @Enum(enumClass = ScrapType.class, ignoreCase = true, message = "html, text 타입만 유효합니다.")
+    private String type;
 
     @Min(1)
-    @NotNull(message = "unit은 필수 값 입니다")
+    @NotNull()
     private Integer unit;
+
+    public ScrapType getScrapType() {
+        return ScrapType.valueOf(type.toUpperCase());
+    }
 
 }

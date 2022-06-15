@@ -22,7 +22,7 @@ public class ScrapService {
      * - bind : 출력단위 묶음
      */
     public ScrapResult scrap(ScrapRequest request) throws Exception {
-        String crawlResult = CrawlerManager.crawl(request.getUrl(), request.getType());
+        String crawlResult = CrawlerManager.crawl(request.getUrl(), request.getScrapType());
         Letter letter = ParserManager.filter(crawlResult);
         String clossResult = ParserManager.cross(letter);
         return ParserManager.bind(clossResult, request.getUnit());
