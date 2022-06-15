@@ -17,7 +17,6 @@ public class Letter {
     public Letter(String alphabet, String number) {
         this.alphabet = alphabet;
         this.number = number;
-        System.out.println(this);
     }
 
     public static Letter of(String alphabet, String number) {

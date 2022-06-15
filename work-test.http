@@ -1,0 +1,2 @@
+### scrap GET 요청
+GET http://localhost:8080/scrap-url?url=https://peacebestill.oopy.io&type=text&unit=140

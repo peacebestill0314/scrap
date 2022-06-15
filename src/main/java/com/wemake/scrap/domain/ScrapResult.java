@@ -20,7 +20,6 @@ public class ScrapResult {
     public ScrapResult(String quotient, String remainder) {
         this.quotient = quotient;
         this.remainder = remainder;
-        System.out.println(this);
     }
 
     public ScrapResult of(String quotient, String remainder) {
