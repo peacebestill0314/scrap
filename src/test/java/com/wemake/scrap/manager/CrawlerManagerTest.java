@@ -24,21 +24,21 @@ class CrawlerManagerTest {
 
         //given
         String expected = "<!doctype html>\n" +
-                "<html lang=\"ko\"> \n" +
-                " <head> \n" +
-                "  <meta charset=\"UTF-8\"> \n" +
-                "  <title></title> \n" +
-                " </head> \n" +
-                " <body>\n" +
-                "   abcdeABCDE12345!@#$%知己之  \n" +
-                " </body>\n" +
+                "<html lang=\"ko\">\n" +
+                "<head>\n" +
+                "<meta charset=\"UTF-8\">\n" +
+                "<title></title>\n" +
+                "</head>\n" +
+                "    <body>\n" +
+                "        abcdeABCDE12345!@#$%知己之\n" +
+                "    </body>\n" +
                 "</html>";
 
         //when
-        String result = CrawlerManager.crawl(url, ScrapType.HTML);
+        String result = CrawlerManager.crawl(url, ScrapType.HTML).replaceAll("\\s+","");
 
         //then
-        assertEquals(expected, result);
+        assertEquals(expected.replaceAll("\\s+",""), result);
     }
 
     @DisplayName("url에 http, https가 없는 경우 IllegalArgumentException 검증")
