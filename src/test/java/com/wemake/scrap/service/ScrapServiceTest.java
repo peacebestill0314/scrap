@@ -30,7 +30,7 @@ public class ScrapServiceTest {
         request.setUnit(unit);
 
         ScrapResult expected = ScrapResult.builder()
-                .quotient("A1a2B3b4C5cDdEe")
+                .quotient("A1a2B3b4C5cD")
                 .remainder("dEe")
                 .build();
 

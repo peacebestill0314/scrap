@@ -24,13 +24,13 @@ class CrawlerManagerTest {
 
         //given
         String expected = "<!doctype html>\n" +
-                "<html lang=\"ko\">\n" +
-                " <head>\n" +
-                "  <meta charset=\"UTF-8\">\n" +
-                "  <title></title>\n" +
-                " </head>\n" +
+                "<html lang=\"ko\"> \n" +
+                " <head> \n" +
+                "  <meta charset=\"UTF-8\"> \n" +
+                "  <title></title> \n" +
+                " </head> \n" +
                 " <body>\n" +
-                "   abcdeABCDE12345!@#$%知己之 \n" +
+                "   abcdeABCDE12345!@#$%知己之  \n" +
                 " </body>\n" +
                 "</html>";
 
