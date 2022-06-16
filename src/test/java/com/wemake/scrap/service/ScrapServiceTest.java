@@ -19,10 +19,11 @@ public class ScrapServiceTest {
     @Autowired
     ScrapService scrapService;
 
-    @DisplayName("resources/static/sub/test.html 경로의 파일로 서비스 로직의 응답 데이터를 검증")
+    @DisplayName("서비스 로직의 응답 데이터를 검증")
     @ParameterizedTest
-    @CsvSource({"http://localhost:8080/stub/test.html, text, 4"})
+    @CsvSource({"https://peacebestill.oopy.io, text, 10"})
     void scrap_성공(String url, String type, Integer unit) throws Exception {
+
         //given
         ScrapRequest request = new ScrapRequest();
         request.setUrl(url);
@@ -30,8 +31,8 @@ public class ScrapServiceTest {
         request.setUnit(unit);
 
         ScrapResult expected = ScrapResult.builder()
-                .quotient("A1a2B3b4C5cD")
-                .remainder("dEe")
+                .quotient("A0A0A0a0a0a0a0a1b1b1b2c2c2c2c3c3c3D3d4d4d5d6d6e8e9e9eeeeeeefgghiiiiiiiiiiiiiJJkLllllmmNnnnnnooooPPppppppppQrrrrrSSSSsssttttttuuuuuuuvvxxxyyz")
+                .remainder("z")
                 .build();
 
         //when
