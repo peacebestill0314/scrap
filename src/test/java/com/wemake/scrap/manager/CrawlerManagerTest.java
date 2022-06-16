@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class CrawlerManagerTest {
 
-    @DisplayName("resources/static/sub/test.html 파일로 크롤링 검증")
+    @DisplayName("유효한 url로 성공 케이스 검증")
     @ParameterizedTest
     @CsvSource({"https://peacebestill.oopy.io"})
     void 크롤링_성공(String url) throws Exception {
