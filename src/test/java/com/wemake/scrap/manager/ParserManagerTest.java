@@ -5,12 +5,14 @@ import com.wemake.scrap.domain.ScrapResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * parser manager 테스트 클래스
  */
+@SpringBootTest
 class ParserManagerTest {
 
     @DisplayName("주어진 문자열에서 숫자와 알파벳으로 분리 검증")

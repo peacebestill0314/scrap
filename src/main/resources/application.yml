@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: com-wemake-scrap
+
+logging:
+  level:
+    root: info
+
+---
+spring:
+  profiles:
+    active: local
+
